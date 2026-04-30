@@ -1,0 +1,15 @@
+[project]
+name = "tarea1-estructura-de-datos-twitter-dataset"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Jose Leiva", email = "email.joseleiva@gmail.com" }]
+requires-python = ">=3.12"
+dependencies = ["kagglehub (>=1.0.1,<2.0.0)"]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
