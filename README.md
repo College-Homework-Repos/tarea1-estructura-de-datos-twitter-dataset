@@ -70,10 +70,12 @@ graph LR
 
 ## Como ejecutar el proyecto
 
-pre-requisitos:
+### pre-requisitos:
 
 - Python
 - [Poetry](https://python-poetry.org/docs/) (administrador de dependencias de python)
+
+### paso a paso:
 
 ```bash
 # clonar repo
