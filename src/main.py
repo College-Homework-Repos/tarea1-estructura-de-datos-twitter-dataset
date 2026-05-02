@@ -2,9 +2,10 @@ from data_structs.linked_list import LinkedList
 from data_structs.structs import Post, User
 from inverted_index.posts import PostsInvertedIndex
 from inverted_index.users import UsersInvertedIndex
+from stopwords import ALL_STOPWORDS
 
 
-def main():
+def main() -> None:
     print("Pruebas basicas de estructuras")
 
     alice_friends = LinkedList()
@@ -25,9 +26,9 @@ def main():
     users_index.add_friend("bob", carol)
 
     print("\nUsuarios indice invertido:")
-    users_index.get_friends("alice").print_list()
+    print(users_index.get_friends("alice"))
 
-    users_index.get_friends("bob").print_list()
+    print(users_index.get_friends("bob"))
 
     likes_1 = LinkedList()
     likes_2 = LinkedList()
@@ -41,18 +42,15 @@ def main():
     post_1.add_user_like("u3")
     post_2.add_user_like("u1")
 
-    stopwords = ["y", "para", "con"]
-    posts_index = PostsInvertedIndex(stopwords)
+    posts_index = PostsInvertedIndex(ALL_STOPWORDS)
     posts_index.add_post(post_1)
     posts_index.add_post(post_2)
     posts_index.add_post(post_3)
 
     python_posts = posts_index.index.get("python")
-    if python_posts is None:
-        python_posts = LinkedList()
-
-    print('\nPosts hashtag="python":')
-    python_posts.print_list()
+    if python_posts is not None:
+        print('\nPosts hashtag="python":')
+        print(python_posts)
 
 
 if __name__ == "__main__":

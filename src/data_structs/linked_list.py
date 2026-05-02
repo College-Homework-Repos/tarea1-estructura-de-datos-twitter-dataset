@@ -33,18 +33,17 @@ class LinkedList:
         self.append(value)
         return True
 
-    def print_list(self) -> None:
+    def __str__(self) -> str:
         current = self.head
         if current is None:
-            print("(vacio)")
-            return
+            return "[None]"
 
-        output = ""
+        parts: list[str] = []
         while current is not None:
             value = current.value
-            if output:
-                output += " -> "
-            output += str(value)
+            parts.append(str(value))
             current = current.next
 
-        print(output)
+        output = " -> ".join(parts)
+        output = f"[{output} -> None]"
+        return output
