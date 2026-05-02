@@ -20,7 +20,51 @@ Debido a que el dataset carece de lo siguiente, estos datos serán generados de 
 - **Filtrado de Stop Words:** Eliminación de artículos, preposiciones y conectores (e.g., "el", "la", "y", "en").
 - **Creación sintética de datos:** Ya que nuestro dataset carece de información sobre los likes que ha dado cada usuario a distintos posts nosotros creamos esos datos de forma sintética y aleatoria, utilizando la información de los demás archivos CSV.
 
-### Diagramas de las estructuras de datos creadas
+## Diagramas de las estructuras de datos creadas
+
+```mermaid
+classDiagram
+    class Usuario {
+        usuario_id: str
+        nombre: str
+        descripción: str
+        número_de_seguidores: int
+        amigos: LinkedList
+    }
+```
+
+```mermaid
+graph LR
+    subgraph D["Diccionario (claves)"]
+        K1["'Usuario A'"]
+        K2["'Usuario B'"]
+        K3["'Usuario C'"]
+    end
+
+    subgraph L["Listas Enlazadas de Nodos de Amigos (valores)"]
+        K1 --> NodeA1["Usuario 1 (Amigo)"]
+        NodeA1 --> NodeA2["Usuario 2 (Amigo)"]
+        NodeA2 --> NodeA3["Usuario 3 (Amigo)"]
+        NodeA3 --> Null1((null))
+
+        K2 --> NodeB1["Usuario 4 (Amigo)"]
+        NodeB1 --> Null2((null))
+
+        K3 --> NodeC1["Usuario 5 (Amigo)"]
+        NodeC1 --> NodeC2["Usuario 6 (Amigo)"]
+        NodeC2 --> Null3((null))
+    end
+```
+
+```mermaid
+classDiagram
+    class Post {
+        post_id: str
+        autor: str
+        texto: str
+        likes: LinkedList
+    }
+```
 
 ```mermaid
 graph LR
@@ -42,29 +86,6 @@ graph LR
 
         T3 --> PostC1[Post 1]
         PostC1 --> NullC((null))
-    end
-```
-
-```mermaid
-graph LR
-    subgraph D["Diccionario (claves)"]
-        K1["'Usuario A'"]
-        K2["'Usuario B'"]
-        K3["'Usuario C'"]
-    end
-
-    subgraph L["Listas Enlazadas de Nodos de Amigos (valores)"]
-        K1 --> NodeA1[Amigo 1]
-        NodeA1 --> NodeA2[Amigo 2]
-        NodeA2 --> NodeA3[Amigo 3]
-        NodeA3 --> Null1((null))
-
-        K2 --> NodeB1[Amigo 4]
-        NodeB1 --> Null2((null))
-
-        K3 --> NodeC1[Amigo 5]
-        NodeC1 --> NodeC2[Amigo 6]
-        NodeC2 --> Null3((null))
     end
 ```
 
