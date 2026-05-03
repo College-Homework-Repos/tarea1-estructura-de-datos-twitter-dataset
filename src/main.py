@@ -8,6 +8,14 @@ from stopwords import ALL_STOPWORDS
 def main() -> None:
     print("Pruebas basicas de estructuras")
 
+    sample_list = LinkedList()
+    print("Lista vacia:", sample_list.is_empty())
+    sample_list.add_node("n1", "n1")
+    sample_list.add_node("n2", "n2")
+    print("Lista con nodos:", sample_list)
+    print("Contiene n1:", sample_list.contains("n1"))
+    print("Contiene n3:", sample_list.contains("n3"))
+
     alice_friends = LinkedList()
     bob_friends = LinkedList()
     carol_friends = LinkedList()
@@ -42,15 +50,26 @@ def main() -> None:
     post_1.add_user_like("u3")
     post_2.add_user_like("u1")
 
+    print("\nLikes del post p1:", post_1.likes)
+
     posts_index = PostsInvertedIndex(ALL_STOPWORDS)
     posts_index.add_post(post_1)
     posts_index.add_post(post_2)
     posts_index.add_post(post_3)
 
-    python_posts = posts_index.index.get("python")
-    if python_posts is not None:
-        print('\nPosts hashtag="python":')
-        print(python_posts)
+    posts_list = LinkedList()
+    posts_list.add_node(post_1, post_1.id)
+    posts_list.add_node(post_2, post_2.id)
+    posts_list.add_node(post_3, post_3.id)
+    posts_index.add_posts(posts_list)
+
+    python_posts = posts_index.search_hashtags(["python"])
+    print("\nBusqueda con un hashtag [python]:")
+    print(python_posts)
+
+    print("\nBusqueda con varios hashtag [python, datos]:")
+    python_multi_search = posts_index.search_hashtags(["python", "datos"])
+    print(python_multi_search)
 
 
 if __name__ == "__main__":

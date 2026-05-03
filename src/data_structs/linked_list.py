@@ -13,13 +13,27 @@ class LinkedList:
         self.tail = None
         self.size = 0
 
-    def __len__(self) -> int:
-        return self.size
-
     def is_empty(self) -> bool:
         return self.size == 0
 
-    def append(self, value: Any) -> None:
+    def contains(self, id: str) -> bool:
+        current = self.head
+        while current is not None:
+            if type(current.value) == str:
+                if current.value == id:
+                    return True
+            elif current.value.id == id:
+                return True
+            current = current.next
+        return False
+
+    def add_node(self, value: Any, id: str) -> bool:
+        if self.contains(id):
+            return False
+        self._append(value)
+        return True
+
+    def _append(self, value: Any) -> None:
         node = Node(value=value, next_node=None)
         if self.tail is None:
             self.head = node
@@ -29,9 +43,8 @@ class LinkedList:
             self.tail = node
         self.size += 1
 
-    def add_node(self, value: Any) -> bool:
-        self.append(value)
-        return True
+    def __len__(self) -> int:
+        return self.size
 
     def __str__(self) -> str:
         current = self.head

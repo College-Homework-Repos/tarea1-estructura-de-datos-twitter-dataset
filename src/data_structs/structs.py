@@ -1,46 +1,44 @@
-from typing import Any
-
 from .linked_list import LinkedList
 
 
 class User:
     def __init__(
         self,
-        user_id: str,
+        id: str,
         name: str,
         description: str,
         followers_count: int,
         friends: LinkedList,
     ) -> None:
-        self.user_id = user_id
-        self.name = name
-        self.description = description
-        self.followers_count = followers_count
-        self.friends = friends
+        self.id: str = id
+        self.name: str = name
+        self.description: str = description
+        self.followers_count: int = followers_count
+        self.friends: LinkedList = friends
 
-    def add_friend(self, friend: Any) -> bool:
-        added = self.friends.add_node(friend)
+    def add_friend(self, friend: "User") -> bool:
+        added = self.friends.add_node(friend.id, friend.id)
         return added
 
     def __str__(self) -> str:
-        return f'User(id="{self.user_id:.5}", name="{self.name:.10}")'
+        return f'User(id="{self.id:.5}", name="{self.name:.10}")'
 
 
 class Post:
     def __init__(
         self,
-        post_id: str,
+        id: str,
         author: str,
         text: str,
         likes: LinkedList,
     ) -> None:
-        self.post_id = post_id
-        self.author = author
-        self.text = text
-        self.likes = likes
+        self.id: str = id
+        self.author: str = author
+        self.text: str = text
+        self.likes: LinkedList = likes
 
     def add_user_like(self, user_id: str) -> bool:
-        return self.likes.add_node(user_id)
+        return self.likes.add_node(user_id, user_id)
 
     def __str__(self) -> str:
-        return f'Post(id="{self.post_id:.5}", author="{self.author:.10}", text="{self.text:.10}...")'
+        return f'Post(id="{self.id:.5}", author="{self.author:.10}", text="{self.text:.10}...")'
