@@ -1,3 +1,4 @@
+import csv
 import re
 
 from data_structs.linked_list import LinkedList
@@ -50,3 +51,34 @@ class PostsInvertedIndex:
                 intersection.add_node(post, post.id)
             current = current.next
         return intersection
+
+    def populate_from_csv(self, posts_csv: str, likes_csv: str) -> None:
+        likes_map: dict[str, LinkedList] = {}
+
+        with open(likes_csv, "r", newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                user_id = row.get("user_id")
+                post_id = row.get("post_id")
+                if not user_id or not post_id:
+                    continue
+                likes_list = likes_map.get(post_id)
+                if likes_list is None:
+                    likes_list = LinkedList()
+                    likes_map[post_id] = likes_list
+                likes_list.add_node(user_id, user_id)
+
+        with open(posts_csv, "r", newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                user_id = row.get("id")
+                if not user_id:
+                    continue
+                for key, value in row.items():
+                    if key.startswith("tweet_") and value:
+                        post_id = f"{user_id}_{key}"
+                        likes = likes_map.get(post_id)
+                        if likes is None:
+                            likes = LinkedList()
+                        post = Post(post_id, user_id, value, likes)
+                        self.add_post(post)
