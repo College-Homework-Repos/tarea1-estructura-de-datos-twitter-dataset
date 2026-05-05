@@ -12,16 +12,16 @@ def read_user_ids(users_path: str) -> list[str]:
     return user_ids
 
 
-def read_edges(edges_path: str) -> set[tuple[str, str]]:
-    edges: set[tuple[str, str]] = set()
+def read_followers(edges_path: str) -> set[tuple[str, str]]:
+    followers: set[tuple[str, str]] = set()
     with open(edges_path, "r", newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         for row in reader:
             follower_id = row.get("follower_id")
             followee_id = row.get("followee_id")
             if follower_id and followee_id:
-                edges.add((follower_id, followee_id))
-    return edges
+                followers.add((follower_id, followee_id))
+    return followers
 
 
 def collect_posts(posts_path: str) -> list[str]:

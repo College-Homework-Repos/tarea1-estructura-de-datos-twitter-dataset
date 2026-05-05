@@ -1,10 +1,10 @@
 from os import path
 import kagglehub
 
-from friends import write_friends_csv
-from io_utils import collect_posts, read_edges, read_user_ids
-from likes import write_likes_csv
-from generate_test import copy_tables_with_less_rows
+from preprocessing.generate_friends import write_friends_csv
+from io_utils import collect_posts, read_followers, read_user_ids
+from preprocessing.generate_likes import write_likes_csv
+from preprocessing.copy_tables import copy_tables_with_less_rows
 
 OUTPUT_DIR = "./data"
 # columnas relevantes: follower_id, followee_id
@@ -29,7 +29,7 @@ def main() -> None:
         return None
 
     user_ids = read_user_ids(USERS_CSV)
-    followers = read_edges(FOLLOWERS_CSV)
+    followers = read_followers(FOLLOWERS_CSV)
     post_ids = collect_posts(POSTS_CSV)
     friends_count = write_friends_csv(FRIENDS_CSV, user_ids, followers)
     likes_count = write_likes_csv(LIKES_CSV, user_ids, post_ids)

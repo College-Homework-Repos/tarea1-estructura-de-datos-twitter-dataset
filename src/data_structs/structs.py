@@ -41,4 +41,6 @@ class Post:
         return self.likes.add_node(user_id, user_id)
 
     def __str__(self) -> str:
-        return f'Post(id="{self.id}", author="{self.author:.10}...", text="{self.text:.10}...")'
+        return (
+            f'Post(id="{self.id}", author="{self.author}", text="{self.text:.10}...")'
+        )
