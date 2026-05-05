@@ -16,9 +16,9 @@ Debido a que el dataset carece de lo siguiente, estos datos serán generados de 
 
 ### Procesamiento de Datos
 
-- Los datos son preprocesados para descartar columnas no usadas y crear las tablas estrictamente necesarias.
-- **Filtrado de Stop Words:** Eliminación de artículos, preposiciones y conectores (e.g., "el", "la", "y", "en").
-- **Creación sintética de datos:** Ya que nuestro dataset carece de información sobre los likes que ha dado cada usuario a distintos posts nosotros creamos esos datos de forma sintética y aleatoria, utilizando la información de los demás archivos CSV.
+- **Reducción de filas:** Ya que el dataset cuenta con al rededor de 10.000 usuarios, los datos se han reducido a 100 filas para probar el código `data/test_data/` y 1500 filas para la ejecución final `data/less_data/`.
+- **Preprocesamiento de amigos:** Se ha generado una tabla `friends.csv` a partir de la tabla `edges.csv` para facilitar la consulta de amigos de cada usuario.
+- **Creación sintética de Likes:** Ya que nuestro dataset carece de información sobre los likes que ha dado cada usuario a distintos posts nosotros creamos esos datos de forma sintética y aleatoria, utilizando la información de los demás archivos CSV en `likes.csv`.
 
 ## Diagramas de las estructuras de datos creadas
 
@@ -106,7 +106,8 @@ cd tarea1-estructura-de-datos-twitter-dataset
 # instalar dependencias
 poetry install
 
-# preprocesar los datos (generar tabla de likes a posts)
+# preprocesar los datos
+# descargar dataset, generar tablas y reducir filas.
 poetry run python ./preprocessing/main.py
 
 # ejecutar el proyecto
