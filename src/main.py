@@ -1,3 +1,4 @@
+import time
 from data_structs.linked_list import LinkedList
 
 from inverted_index.posts import PostsInvertedIndex
@@ -5,8 +6,8 @@ from inverted_index.users import UsersInvertedIndex
 
 from stopwords import ALL_STOPWORDS
 
-DATA_DIR = "./data/test_data"  # 100 max rows
-# DATA_DIR = "./data/less_data" # 1500 max rows
+# DATA_DIR = "./data/test_data"  # 100 max rows
+DATA_DIR = "./data/less_data"  # 1500 max rows
 FRIENDS_CSV = DATA_DIR + "/friends.csv"
 LIKES_CSV = DATA_DIR + "/likes.csv"
 USERS_CSV = DATA_DIR + "/user_info.csv"
@@ -14,6 +15,7 @@ POSTS_CSV = DATA_DIR + "/user_tweets.csv"
 
 
 def main() -> None:
+    start_time = time.time()
     users_index = UsersInvertedIndex()
     posts_index = PostsInvertedIndex(ALL_STOPWORDS)
 
@@ -45,6 +47,9 @@ def main() -> None:
     print(posts_with_python)
     print("\nBusqueda con hashtags [people, twitter]:")
     print(posts_with_animals)
+    end_time = time.time()
+
+    print(f"\nTiempo total de ejecución: {end_time - start_time:.2f} segundos.")
 
 
 if __name__ == "__main__":

@@ -1,10 +1,10 @@
 from os import path
 import kagglehub
 
-from preprocessing.generate_friends import write_friends_csv
+from generate_friends import write_friends_csv
 from io_utils import collect_posts, read_followers, read_user_ids
-from preprocessing.generate_likes import write_likes_csv
-from preprocessing.copy_tables import copy_tables_with_less_rows
+from generate_likes import write_likes_csv
+from copy_tables import copy_tables_with_less_rows
 
 OUTPUT_DIR = "./data"
 # columnas relevantes: follower_id, followee_id
@@ -44,7 +44,7 @@ def main() -> None:
         source_dir=dataset_path, output_subdir="test_data", max_rows=100
     )
     copy_tables_with_less_rows(
-        source_dir=dataset_path, output_subdir="less_data", max_rows=100
+        source_dir=dataset_path, output_subdir="less_data", max_rows=1500
     )
 
 
