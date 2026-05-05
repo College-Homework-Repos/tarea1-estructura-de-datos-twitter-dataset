@@ -3,7 +3,7 @@ import os
 from os import path
 
 
-def generate_test_tables(
+def copy_tables_with_less_rows(
     source_dir: str, output_subdir: str, max_rows: int = 200
 ) -> None:
     output_dir = path.join(source_dir, output_subdir)

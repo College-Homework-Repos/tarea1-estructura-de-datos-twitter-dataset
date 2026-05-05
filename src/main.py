@@ -5,7 +5,8 @@ from inverted_index.users import UsersInvertedIndex
 
 from stopwords import ALL_STOPWORDS
 
-DATA_DIR = "./data/test_data"
+DATA_DIR = "./data/test_data"  # 100 max rows
+# DATA_DIR = "./data/less_data" # 1500 max rows
 FRIENDS_CSV = DATA_DIR + "/friends.csv"
 LIKES_CSV = DATA_DIR + "/likes.csv"
 USERS_CSV = DATA_DIR + "/user_info.csv"
@@ -37,12 +38,12 @@ def main() -> None:
     print(user3_friends)
 
     posts_with_python: LinkedList = posts_index.search_hashtags(["books"])
-    posts_with_animals: LinkedList = posts_index.search_hashtags(["dog"])
+    posts_with_animals: LinkedList = posts_index.search_hashtags(["people", "twitter"])
 
     print("\nIndice invertido de posts:")
     print("\nBusqueda con hashtag [python]:")
     print(posts_with_python)
-    print("\nBusqueda con hashtag [dog, cat]:")
+    print("\nBusqueda con hashtags [people, twitter]:")
     print(posts_with_animals)
 
 
