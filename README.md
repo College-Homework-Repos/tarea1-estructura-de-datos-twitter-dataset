@@ -93,6 +93,7 @@ graph LR
 
 ### pre-requisitos:
 
+- Git
 - Python
 - [Poetry](https://python-poetry.org/docs/) (administrador de dependencias de python)
 
@@ -100,7 +101,7 @@ graph LR
 
 ```bash
 # clonar repo
-gh repo clone JoseIgnacioGC/tarea1-estructura-de-datos-twitter-dataset
+git clone https://github.com/College-Homework-Repos/tarea1-estructura-de-datos-twitter-dataset.git
 cd tarea1-estructura-de-datos-twitter-dataset
 
 # instalar dependencias
