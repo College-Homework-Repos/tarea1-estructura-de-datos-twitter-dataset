@@ -16,12 +16,6 @@ class PostsInvertedIndex:
                 self._index[hashtag] = LinkedList()
             self._index[hashtag].add_node(post, post.id)
 
-    def add_posts(self, posts: LinkedList) -> None:
-        current = posts.head
-        while current is not None:
-            self.add_post(current.value)
-            current = current.next
-
     def search_hashtags(self, hashtags: list[str]) -> LinkedList:
         if not hashtags:
             return LinkedList()
