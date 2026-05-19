@@ -1,7 +1,7 @@
 import csv
 
 
-def read_user_ids(users_path: str) -> list[str]:
+def get_user_ids(users_path: str) -> list[str]:
     user_ids: list[str] = []
     with open(users_path, "r", newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -12,7 +12,7 @@ def read_user_ids(users_path: str) -> list[str]:
     return user_ids
 
 
-def read_followers(edges_path: str) -> set[tuple[str, str]]:
+def get_both_followers_ids(edges_path: str) -> set[tuple[str, str]]:
     followers: set[tuple[str, str]] = set()
     with open(edges_path, "r", newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -24,7 +24,7 @@ def read_followers(edges_path: str) -> set[tuple[str, str]]:
     return followers
 
 
-def collect_posts(posts_path: str) -> list[str]:
+def get_posts_ids(posts_path: str) -> list[str]:
     post_ids: list[str] = []
     with open(posts_path, "r", newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)

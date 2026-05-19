@@ -2,7 +2,7 @@ from os import path
 import kagglehub
 
 from generate_friends import write_friends_csv
-from io_utils import collect_posts, read_followers, read_user_ids
+from io_utils import get_posts_ids, get_both_followers_ids, get_user_ids
 from generate_likes import write_likes_csv
 from copy_tables import copy_tables_with_less_rows
 
@@ -28,10 +28,11 @@ def main() -> None:
         print("Archivos ya generados, no se vuelven a crear")
         return None
 
-    user_ids = read_user_ids(USERS_CSV)
-    followers = read_followers(FOLLOWERS_CSV)
-    post_ids = collect_posts(POSTS_CSV)
-    friends_count = write_friends_csv(FRIENDS_CSV, user_ids, followers)
+    user_ids = get_user_ids(USERS_CSV)
+    both_followers_ids = get_both_followers_ids(FOLLOWERS_CSV)
+    post_ids = get_posts_ids(POSTS_CSV)
+
+    friends_count = write_friends_csv(FRIENDS_CSV, user_ids, both_followers_ids)
     likes_count = write_likes_csv(LIKES_CSV, user_ids, post_ids)
 
     print("Ruta al dataset:", dataset_path)
@@ -41,10 +42,16 @@ def main() -> None:
     print("Filas de likes escritas:", likes_count)
 
     copy_tables_with_less_rows(
-        source_dir=dataset_path, output_subdir="test_data", max_rows=100
+        source_dir=dataset_path,
+        output_subdir="test_data",
+        max_rows=100,
+        user_tweets_limit=50,
     )
     copy_tables_with_less_rows(
-        source_dir=dataset_path, output_subdir="less_data", max_rows=1500
+        source_dir=dataset_path,
+        output_subdir="less_data",
+        max_rows=1500,
+        user_tweets_limit=50,
     )
 
 

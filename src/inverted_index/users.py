@@ -8,27 +8,13 @@ class UsersInvertedIndex:
     def __init__(self) -> None:
         self._index: dict[str, LinkedList] = {}
 
-    def add_user(self, user: User) -> bool:
-        if user.id not in self._index:
-            self._index[user.id] = LinkedList()
-            return True
-        return False
-
-    def add_friend(self, user_id: str, friend: User) -> bool:
-        if user_id not in self._index:
-            self._index[user_id] = LinkedList()
-        return self._index[user_id].add_node(friend, friend.id)
-
-    def get_friend(self, user_name: str):
-        return self._index.get(user_name)
-
     def get_friends(self, user_id: str):
         friend = self._index.get(user_id)
         if friend is None:
             return LinkedList()
         return friend
 
-    def populate_from_csv(self, users_csv: str, friends_csv: str) -> None:
+    def load_data_from_csv(self, users_csv: str, friends_csv: str) -> None:
         users_by_id: dict[str, User] = {}
         with open(users_csv, "r", newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
@@ -41,7 +27,7 @@ class UsersInvertedIndex:
                     continue
                 followers_count = int(followers_text) if followers_text.isdigit() else 0
                 user = User(user_id, name, description, followers_count, LinkedList())
-                self.add_user(user)
+                self._add_user(user)
                 users_by_id[user_id] = user
 
         with open(friends_csv, "r", newline="", encoding="utf-8") as handle:
@@ -58,4 +44,18 @@ class UsersInvertedIndex:
                 for friend_id in friend_ids:
                     friend_user = users_by_id.get(friend_id)
                     if friend_user is not None:
-                        self.add_friend(user.id, friend_user)
+                        self._add_friend(user.id, friend_user)
+
+    def _add_user(self, user: User) -> bool:
+        if user.id not in self._index:
+            self._index[user.id] = LinkedList()
+            return True
+        return False
+
+    def _add_friend(self, user_id: str, friend: User) -> bool:
+        if user_id not in self._index:
+            self._index[user_id] = LinkedList()
+        return self._index[user_id].add_node(friend, friend.id)
+
+    def _get_friend(self, user_name: str):
+        return self._index.get(user_name)

@@ -17,7 +17,7 @@ def write_friends_csv(
         writer = csv.writer(handle)
         writer.writerow(["user_id", "friends"])
         for user_id in user_ids:
-            friends = sorted(friends_dict.get(user_id, set()))
+            friends = friends_dict.get(user_id, set())
             friends_text = ";".join(friends)
             writer.writerow([user_id, friends_text])
             rows_written += 1

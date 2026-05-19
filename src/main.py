@@ -20,9 +20,9 @@ def main() -> None:
     posts_index = PostsInvertedIndex(ALL_STOPWORDS)
 
     print("Cargando usuarios en indice invertido...")
-    users_index.populate_from_csv(USERS_CSV, FRIENDS_CSV)
+    users_index.load_data_from_csv(USERS_CSV, FRIENDS_CSV)
     print("Cargando posts en indice invertido...")
-    posts_index.populate_from_csv(POSTS_CSV, LIKES_CSV)
+    posts_index.load_data_from_csv(POSTS_CSV, LIKES_CSV)
 
     print("Indices invertidos cargados.")
     print("Cargando consultas...")

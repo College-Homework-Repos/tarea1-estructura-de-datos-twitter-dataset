@@ -10,12 +10,6 @@ class PostsInvertedIndex:
         self._index: dict[str, LinkedList] = {}
         self._stopwords = stopwords
 
-    def add_post(self, post: Post) -> None:
-        for hashtag in self._get_hashtags_from_post(post.text):
-            if hashtag not in self._index:
-                self._index[hashtag] = LinkedList()
-            self._index[hashtag].add_node(post, post.id)
-
     def search_hashtags(self, hashtags: list[str]) -> LinkedList:
         if not hashtags:
             return LinkedList()
@@ -32,35 +26,22 @@ class PostsInvertedIndex:
             current = self._intersect_posts(current, next_list)
         return current
 
-    def _get_hashtags_from_post(self, text: str) -> list[str]:
-        words = re.findall(r"[A-Za-z0-9]+", text.lower())
-        return [hashtag for hashtag in words if hashtag not in self._stopwords]
-
-    def _intersect_posts(self, left: LinkedList, right: LinkedList) -> LinkedList:
-        intersection = LinkedList()
-        current = left.head
-        while current is not None:
-            post = current.value
-            if right.contains(post.id):
-                intersection.add_node(post, post.id)
-            current = current.next
-        return intersection
-
-    def populate_from_csv(self, posts_csv: str, likes_csv: str) -> None:
+    def load_data_from_csv(self, posts_csv: str, likes_csv: str) -> None:
         likes_map: dict[str, LinkedList] = {}
 
         with open(likes_csv, "r", newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
             for row in reader:
-                user_id = row.get("user_id")
                 post_id = row.get("post_id")
-                if not user_id or not post_id:
+                likes_raw = row.get("likes", "")
+                if not post_id:
                     continue
-                likes_list = likes_map.get(post_id)
-                if likes_list is None:
-                    likes_list = LinkedList()
-                    likes_map[post_id] = likes_list
-                likes_list.add_node(user_id, user_id)
+                likes_list = LinkedList()
+                likes_map[post_id] = likes_list
+                if likes_raw:
+                    for user_id in likes_raw.split(";"):
+                        if user_id:
+                            likes_list.add_node(user_id, user_id)
 
         with open(posts_csv, "r", newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
@@ -75,4 +56,25 @@ class PostsInvertedIndex:
                         if likes is None:
                             likes = LinkedList()
                         post = Post(post_id, user_id, value, likes)
-                        self.add_post(post)
+                        self._add_post(post)
+
+    # Creación del índice
+    def _add_post(self, post: Post) -> None:
+        for hashtag in self._get_hashtags_from_post(post.text):
+            if hashtag not in self._index:
+                self._index[hashtag] = LinkedList()
+            self._index[hashtag].add_node(post, post.id)
+
+    def _get_hashtags_from_post(self, text: str) -> list[str]:
+        words = re.findall(r"[A-Za-z0-9]+", text.lower())
+        return [hashtag for hashtag in words if hashtag not in self._stopwords]
+
+    def _intersect_posts(self, left: LinkedList, right: LinkedList) -> LinkedList:
+        intersection = LinkedList()
+        current = left.head
+        while current is not None:
+            post = current.value
+            if right.contains(post.id):
+                intersection.add_node(post, post.id)
+            current = current.next
+        return intersection
