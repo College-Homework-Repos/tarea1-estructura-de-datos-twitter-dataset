@@ -34,14 +34,13 @@ class PostsInvertedIndex:
             for row in reader:
                 post_id = row.get("post_id")
                 likes_raw = row.get("likes", "")
-                if not post_id:
+                if not post_id or not likes_raw:
                     continue
                 likes_list = LinkedList()
                 likes_map[post_id] = likes_list
-                if likes_raw:
-                    for user_id in likes_raw.split(";"):
-                        if user_id:
-                            likes_list.add_node(user_id, user_id)
+                for user_id in likes_raw.split(";"):
+                    if user_id:
+                        likes_list.add_node(user_id, user_id)
 
         with open(posts_csv, "r", newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
@@ -55,6 +54,7 @@ class PostsInvertedIndex:
                         likes = likes_map.get(post_id)
                         if likes is None:
                             likes = LinkedList()
+                        # Creamos el post y lo agregamos al índice
                         post = Post(post_id, user_id, value, likes)
                         self._add_post(post)
 

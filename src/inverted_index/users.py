@@ -23,9 +23,10 @@ class UsersInvertedIndex:
                 name = row.get("name")
                 description = row.get("description") or ""
                 followers_text = row.get("followers_count") or "0"
+                followers_count = int(followers_text)
                 if not user_id or not name:
                     continue
-                followers_count = int(followers_text) if followers_text.isdigit() else 0
+                # Creamos el usuario y lo agregamos al índice
                 user = User(user_id, name, description, followers_count, LinkedList())
                 self._add_user(user)
                 users_by_id[user_id] = user
@@ -41,6 +42,7 @@ class UsersInvertedIndex:
                 if user is None:
                     continue
                 friend_ids = [item for item in friends_raw.split(";") if item]
+                # Agregamos cada amigo al usuario (verificamos que el amigo exista en el índice)
                 for friend_id in friend_ids:
                     friend_user = users_by_id.get(friend_id)
                     if friend_user is not None:
