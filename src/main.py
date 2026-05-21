@@ -13,6 +13,13 @@ LIKES_CSV = DATA_DIR + "/likes.csv"
 USERS_CSV = DATA_DIR + "/user_info.csv"
 POSTS_CSV = DATA_DIR + "/user_tweets.csv"
 
+"""
+En el programa principal se hacen las siguientes tareas:
+1. Se cargan los datos de los archivos CSV en los índices invertidos de usuario y posts.
+2. Se realizan 3 consultas al índice de usuarios para obtener los amigos de 3 usuarios específicos y luego se imprime el resultado.
+3. Se realizan 2 consultas al índice de posts para obtener los posts que contienen ciertos hashtags y luego se imprime el resultado.
+"""
+
 
 def main() -> None:
     start_time = time.time()
