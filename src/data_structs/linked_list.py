@@ -44,11 +44,6 @@ class LinkedList:
         self.size += 1
 
     # my_lista = LinkedList()
-    # len(my_lista)
-    def __len__(self) -> int:
-        return self.size
-
-    # my_lista = LinkedList()
     # print(my_lista)
     def __str__(self) -> str:
         current = self.head
