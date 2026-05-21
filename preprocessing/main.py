@@ -23,7 +23,7 @@ En el prerpocesado de los datos se hacen las siguientes tareas:
 2. Se generan dos archivos CSV:
     - Los amigos de cada usuario (friends.csv)
     - Los usuarios que le dieron like a cada post (likes.csv).
-3. Se reducen los datos de cada tabla, con un máximo de 1500 filas y se guarda en `data/less_data/`.
+3. Se reducen los datos de cada tabla, con un máximo de 1500 filas, 50 tweets por usuario y se guarda en `data/less_data/`.
 """
 
 dataset_path = kagglehub.dataset_download(
