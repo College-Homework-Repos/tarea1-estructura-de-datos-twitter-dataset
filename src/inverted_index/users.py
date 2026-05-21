@@ -59,6 +59,3 @@ class UsersInvertedIndex:
         if user_id not in self._index:
             self._index[user_id] = LinkedList()
         return self._index[user_id].add_node(friend, friend.id)
-
-    def _get_friend(self, user_name: str):
-        return self._index.get(user_name)
