@@ -20,6 +20,7 @@ class User:
         added = self.friends.add_node(friend.id, friend.id)
         return added
 
+    # print(user)
     def __str__(self) -> str:
         return f'User(id="{self.id:.5}", name="{self.name:.10}")'
 
@@ -40,6 +41,7 @@ class Post:
     def add_user_like(self, user_id: str) -> bool:
         return self.likes.add_node(user_id, user_id)
 
+    # print(post)
     def __str__(self) -> str:
         return (
             f'Post(id="{self.id}", author="{self.author}", text="{self.text:.10}...")'

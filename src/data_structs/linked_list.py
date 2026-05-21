@@ -27,6 +27,7 @@ class LinkedList:
             current = current.next
         return False
 
+    # Inserción de amigos, posts, etc. sin duplicados
     def add_node(self, value: Any, id: str) -> bool:
         if self.contains(id):
             return False

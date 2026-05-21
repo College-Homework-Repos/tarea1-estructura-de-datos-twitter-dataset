@@ -10,6 +10,7 @@ class PostsInvertedIndex:
         self._index: dict[str, LinkedList] = {}
         self._stopwords = stopwords
 
+    # Búsqueda: dado uno o más "hashtags", devuelve los post que los contienen.
     def search_hashtags(self, hashtags: list[str]) -> LinkedList:
         if not hashtags:
             return LinkedList()
@@ -58,7 +59,7 @@ class PostsInvertedIndex:
                         post = Post(post_id, user_id, value, likes)
                         self._add_post(post)
 
-    # Creación del índice
+    # Creación del índice y inserción de posts sin duplicados
     def _add_post(self, post: Post) -> None:
         for hashtag in self._get_hashtags_from_post(post.text):
             if hashtag not in self._index:

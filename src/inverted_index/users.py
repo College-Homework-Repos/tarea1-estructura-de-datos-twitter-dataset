@@ -8,6 +8,7 @@ class UsersInvertedIndex:
     def __init__(self) -> None:
         self._index: dict[str, LinkedList] = {}
 
+    # Búsqueda: devuelve los amigos de un determinado usuario.
     def get_friends(self, user_id: str):
         friend = self._index.get(user_id)
         if friend is None:
