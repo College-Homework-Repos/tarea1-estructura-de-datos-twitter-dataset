@@ -7,6 +7,7 @@ class Node:
         self.next = next_node
 
 
+# Lista enlazada simple
 class LinkedList:
     def __init__(self) -> None:
         self.head = None

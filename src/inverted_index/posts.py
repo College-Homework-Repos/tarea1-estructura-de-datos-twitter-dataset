@@ -64,10 +64,12 @@ class PostsInvertedIndex:
         for hashtag in self._get_hashtags_from_post(post.text):
             if hashtag not in self._index:
                 self._index[hashtag] = LinkedList()
+            # Agregamos el post sin duplicados
             self._index[hashtag].add_node(post, post.id)
 
     def _get_hashtags_from_post(self, text: str) -> list[str]:
         words = re.findall(r"[A-Za-z0-9]+", text.lower())
+        # Toma cada palabra del post y verifica que no esté en "stopwords".
         return [hashtag for hashtag in words if hashtag not in self._stopwords]
 
     def _intersect_posts(self, left: LinkedList, right: LinkedList) -> LinkedList:
