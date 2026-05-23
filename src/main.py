@@ -47,14 +47,16 @@ def main() -> None:
     print("\nAmigos de usuario 3:")
     print(user3_friends)
 
-    posts_with_python: LinkedList = posts_index.search_hashtags(["books"])
-    posts_with_animals: LinkedList = posts_index.search_hashtags(["people", "twitter"])
+    posts_with_python: LinkedList = posts_index.search_posts_with_hashtags(["books"])
+    posts_related_to_twitter: LinkedList = posts_index.search_posts_with_hashtags(
+        ["people", "twitter"]
+    )
 
     print("\nIndice invertido de posts:")
     print("\nBusqueda con hashtag [python]:")
     print(posts_with_python)
     print("\nBusqueda con hashtags [people, twitter]:")
-    print(posts_with_animals)
+    print(posts_related_to_twitter)
 
     end_time = time.time()
     print(f"\nTiempo total de ejecución: {end_time - start_time:.2f} segundos.")

@@ -11,10 +11,10 @@ class PostsInvertedIndex:
         self._stopwords = stopwords
 
     # Búsqueda: dado uno o más "hashtags", devuelve los post que los contienen.
-    def search_hashtags(self, hashtags: list[str]) -> LinkedList:
+    def search_posts_with_hashtags(self, hashtags: list[str]) -> LinkedList:
         if not hashtags:
             return LinkedList()
-
+        # Obtenemos la lista de posts con el primer hashtag
         result = self._index.get(hashtags[0])
         if result is None:
             return LinkedList()
@@ -24,6 +24,7 @@ class PostsInvertedIndex:
             next_list = self._index.get(term)
             if next_list is None:
                 return LinkedList()
+            # Buscamos la intersección de los resultados de cada hashtag
             current = self._intersect_posts(current, next_list)
         return current
 
