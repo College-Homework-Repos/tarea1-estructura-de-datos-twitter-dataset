@@ -17,14 +17,6 @@ USERS_CSV = OUTPUT_DIR + "/user_info.csv"
 FRIENDS_CSV = OUTPUT_DIR + "/friends.csv"
 LIKES_CSV = OUTPUT_DIR + "/likes.csv"
 
-"""
-En el prerpocesado de los datos se hacen las siguientes tareas:
-1. Se descarga el dataset de Kaggle.
-2. Se generan dos archivos CSV:
-    - Los amigos de cada usuario (friends.csv)
-    - Los usuarios que le dieron like a cada post (likes.csv).
-3. Se reducen los datos de cada tabla, con un máximo de 1500 filas, 50 tweets por usuario y se guarda en `data/less_data/`.
-"""
 
 dataset_path = kagglehub.dataset_download(
     "sanketrai/twitter-mbti-dataset", output_dir=OUTPUT_DIR
