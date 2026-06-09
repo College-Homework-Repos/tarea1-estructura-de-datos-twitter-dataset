@@ -6,7 +6,7 @@ from data_structs.structs import Post
 
 
 class PostsInvertedIndex:
-    def __init__(self, stopwords: list[str]) -> None:
+    def __init__(self, stopwords: set[str]) -> None:
         self._index: dict[str, LinkedList] = {}
         self._stopwords = stopwords
 

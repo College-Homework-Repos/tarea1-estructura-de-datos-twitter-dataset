@@ -13,26 +13,20 @@ class LinkedList:
         self.head = None
         self.tail = None
         self.size = 0
+        self._ids: set[str] = set()
 
     def is_empty(self) -> bool:
         return self.size == 0
 
     def contains(self, id: str) -> bool:
-        current = self.head
-        while current is not None:
-            if type(current.value) == str:
-                if current.value == id:
-                    return True
-            elif current.value.id == id:
-                return True
-            current = current.next
-        return False
+        return id in self._ids
 
     # Inserción de amigos, posts, etc. sin duplicados
     def add_node(self, value: Any, id: str) -> bool:
         if self.contains(id):
             return False
         self._append(value)
+        self._ids.add(id)
         return True
 
     def _append(self, value: Any) -> None:

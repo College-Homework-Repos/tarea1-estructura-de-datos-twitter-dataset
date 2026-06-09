@@ -6,12 +6,14 @@ from inverted_index.users import UsersInvertedIndex
 
 from stopwords import ALL_STOPWORDS
 
-DATA_DIR = "./data/test_data"  # 100 max rows
-# DATA_DIR = "./data/less_data"  # 1500 max rows
+# DATA_DIR = "./data/test_data"  # 100 max rows
+DATA_DIR = "./data/less_data"  # 1500 max rows
 FRIENDS_CSV = DATA_DIR + "/friends.csv"
 LIKES_CSV = DATA_DIR + "/likes.csv"
 USERS_CSV = DATA_DIR + "/user_info.csv"
 POSTS_CSV = DATA_DIR + "/user_tweets.csv"
+
+# lista de adyacencia
 
 
 def main() -> None:
