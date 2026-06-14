@@ -3,16 +3,16 @@ from typing import Any
 
 class Node:
     def __init__(self, value: Any, next_node: "Node | None") -> None:
-        self.value = value
-        self.next = next_node
+        self.value: Any = value
+        self.next: Node | None = next_node
 
 
 # Lista enlazada simple
 class LinkedList:
     def __init__(self) -> None:
-        self.head = None
-        self.tail = None
-        self.size = 0
+        self.head: Node | None = None
+        self.tail: Node | None = None
+        self.size: int = 0
         self._ids: set[str] = set()
 
     def is_empty(self) -> bool:

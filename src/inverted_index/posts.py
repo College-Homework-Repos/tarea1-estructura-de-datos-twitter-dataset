@@ -8,7 +8,7 @@ from data_structs.structs import Post
 class PostsInvertedIndex:
     def __init__(self, stopwords: set[str]) -> None:
         self._index: dict[str, LinkedList] = {}
-        self._stopwords = stopwords
+        self._stopwords: set[str] = stopwords
 
     # Búsqueda: dado uno o más "hashtags", devuelve los post que los contienen.
     def search_posts_with_hashtags(self, hashtags: list[str]) -> LinkedList:
