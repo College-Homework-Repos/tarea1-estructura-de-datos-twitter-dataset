@@ -53,6 +53,12 @@ def main() -> None:
         max_rows=1500,
         user_tweets_limit=50,
     )
+    copy_tables_with_less_rows(
+        source_dir=dataset_path,
+        output_subdir="release_data",
+        max_rows=5000,
+        user_tweets_limit=100,
+    )
 
 
 if __name__ == "__main__":
