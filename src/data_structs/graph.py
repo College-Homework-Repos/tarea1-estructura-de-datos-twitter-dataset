@@ -43,10 +43,10 @@ class SocialGraph:
 
     def bfs_get_connections(
         self, root_user_id: str
-    ) -> tuple[set[str], set[str], set[str]]:
-        degree_1: set[str] = set()
-        degree_2: set[str] = set()
-        degree_3: set[str] = set()
+    ) -> tuple[LinkedList, LinkedList, LinkedList]:
+        degree_1 = LinkedList()
+        degree_2 = LinkedList()
+        degree_3 = LinkedList()
 
         if root_user_id not in self.graph_nodes:
             return degree_1, degree_2, degree_3
@@ -57,20 +57,22 @@ class SocialGraph:
         while queue:
             current_id, current_degree = queue.popleft()
 
+            current_graph_node = self.graph_nodes[current_id]
+            current_user = current_graph_node.user
+
             match current_degree:
                 case 1:
-                    degree_1.add(current_id)
+                    degree_1.add_node(value=current_user, id=current_id)
                 case 2:
-                    degree_2.add(current_id)
+                    degree_2.add_node(value=current_user, id=current_id)
                 case 3:
-                    degree_3.add(current_id)
+                    degree_3.add_node(value=current_user, id=current_id)
                     continue
                 case degree if degree > 3:
                     break
                 case _:
                     pass
 
-            current_graph_node = self.graph_nodes[current_id]
             current_node = current_graph_node.connections_list.head
 
             while current_node is not None:
