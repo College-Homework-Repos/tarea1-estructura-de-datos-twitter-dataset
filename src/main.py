@@ -4,7 +4,8 @@ from data_structs.graph import SocialGraph
 from inverted_index.users import UsersInvertedIndex
 
 # DATA_DIR = "./data/test_data"  # 100 max rows
-DATA_DIR = "./data/less_data"  # 1500 max rows
+# DATA_DIR = "./data/less_data"  # 1500 max rows
+DATA_DIR = "./data/release_data"  # 5000 max rows
 FRIENDS_CSV = DATA_DIR + "/friends.csv"
 LIKES_CSV = DATA_DIR + "/likes.csv"
 USERS_CSV = DATA_DIR + "/user_info.csv"
@@ -33,19 +34,19 @@ def main() -> None:
     user3_connections = social_graph.bfs_get_connections("89903824")
 
     print("\nConexiones de usuario 1:")
-    print("Grado 1:", user1_connections[0])
-    print("Grado 2:", user1_connections[1])
-    print("Grado 3:", user1_connections[2])
+    print("Grado 1\n:", user1_connections[0])
+    print("Grado 2\n:", user1_connections[1])
+    print("Grado 3\n:", user1_connections[2])
 
     print("\nConexiones de usuario 1:")
-    print("Grado 1:", user2_connections[0])
-    print("Grado 2:", user2_connections[1])
-    print("Grado 3:", user2_connections[2])
+    print("Grado 1\n:", user2_connections[0])
+    print("Grado 2\n:", user2_connections[1])
+    print("Grado 3\n:", user2_connections[2])
 
     print("\nConexiones de usuario 1:")
-    print("Grado 1:", user3_connections[0])
-    print("Grado 2:", user3_connections[1])
-    print("Grado 3:", user3_connections[2])
+    print("Grado 1\n:", user3_connections[0])
+    print("Grado 2\n:", user3_connections[1])
+    print("Grado 3\n:", user3_connections[2])
 
     end_time = time.time()
     print(f"\nTiempo total de ejecución: {end_time - start_time:.2f} segundos.")
