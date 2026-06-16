@@ -7,7 +7,7 @@ from data_structs.structs import Post
 
 class PostsInvertedIndex:
     def __init__(self, stopwords: set[str]) -> None:
-        self._index: dict[str, LinkedList] = {}
+        self.index: dict[str, LinkedList] = {}
         self._stopwords: set[str] = stopwords
 
     # Búsqueda: dado uno o más "hashtags", devuelve los post que los contienen.
@@ -15,21 +15,22 @@ class PostsInvertedIndex:
         if not hashtags:
             return LinkedList()
         # Obtenemos la lista de posts con el primer hashtag
-        result = self._index.get(hashtags[0])
+        result = self.index.get(hashtags[0])
         if result is None:
             return LinkedList()
 
         current = result
         for term in hashtags[1:]:
-            next_list = self._index.get(term)
+            next_list = self.index.get(term)
             if next_list is None:
                 return LinkedList()
             # Buscamos la intersección de los resultados de cada hashtag
             current = self._intersect_posts(current, next_list)
         return current
 
-    def load_data_from_csv(self, posts_csv: str, likes_csv: str) -> None:
+    def load_data_from_csv(self, posts_csv: str, likes_csv: str) -> dict[str, Post]:
         likes_map: dict[str, LinkedList] = {}
+        posts_by_id: dict[str, Post] = {}
 
         with open(likes_csv, "r", newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
@@ -58,15 +59,17 @@ class PostsInvertedIndex:
                             likes = LinkedList()
                         # Creamos el post y lo agregamos al índice
                         post = Post(post_id, user_id, value, likes)
+                        posts_by_id[post_id] = post
                         self._add_post(post)
+        return posts_by_id
 
     # Creación del índice y inserción de posts sin duplicados
     def _add_post(self, post: Post) -> None:
         for hashtag in self._get_hashtags_from_post(post.text):
-            if hashtag not in self._index:
-                self._index[hashtag] = LinkedList()
+            if hashtag not in self.index:
+                self.index[hashtag] = LinkedList()
             # Agregamos el post sin duplicados
-            self._index[hashtag].add_node(post, post.id)
+            self.index[hashtag].add_node(post, post.id)
 
     def _get_hashtags_from_post(self, text: str) -> list[str]:
         words = re.findall(r"[A-Za-z0-9]+", text.lower())
