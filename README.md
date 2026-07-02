@@ -1,6 +1,6 @@
 # Estructuras de Datos - Dataset de Twitter con Índice Invertido
 
-Este proyecto implementa índices invertidos sobre memoria dinámica.
+Este proyecto implementa manualmente listas enlazadas, índices invertidos, grafos y tablas hash. Todo sobre memoria dinámica.
 
 ## Dataset: Twitter MBTI Personality Types
 
@@ -20,9 +20,11 @@ Debido a que el dataset carece de lo siguiente, estos datos serán generados de 
 - [Entrega 1](#entrega-1)
     - [Procesamiento de Datos](#procesamiento-de-datos)
     - [Diagramas de las estructuras de datos creadas](#diagramas-de-las-estructuras-de-datos-creadas)
+    - [Funciones principales implementadas](#funciones-principales-implementadas)
 - [Entrega 2](#entrega-2)
     - [Diagramas de las estructuras de datos creadas](#diagramas-de-las-estructuras-de-datos-creadas-1)
     - [Complejidad algorítmica de `bfs_get_connections`](#complejidad-algorítmica-de-bfs_get_connections)
+    - [Funciones principales implementadas](#funciones-principales-implementadas-1)
 - [Entrega 3](#entrega-3)
 
 ## Como ejecutar el proyecto
@@ -54,7 +56,7 @@ poetry run python ./src/main.py
 
 # Entrega 1
 
-### Procesamiento de Datos
+## Procesamiento de Datos
 
 - **Reducción de filas:** Ya que el dataset cuenta con al rededor de 10.000 usuarios, los datos se han reducido a 1500 filas para probar el código `data/less_data/` y 5000 filas para la ejecución final `data/release_data/`.
 - **Reducción de posts** cada usuario tiene ahora un máximo de 50 posts (en el dataset original son 200).
@@ -134,6 +136,26 @@ graph LR
     end
 ```
 
+## Funciones principales implementadas
+
+**Clase `LinkedList`:**
+
+- `add_node`: Inserta un elemento garantizando que no existan duplicados.
+- `contains`: Verifica la existencia de un elemento en la estructura.
+- `is_empty`: Retorna verdadero si la estructura carece de elementos.
+
+**Índice Invertido de Usuarios (`UsersInvertedIndex`)**
+
+- `load_data_from_csv`: Procesa los archivos CSV para construir el diccionario de usuarios y puebla sus respectivas listas de amigos.
+- `get_friends`: Busca y retorna la lista enlazada de contactos directos de un usuario específico.
+
+**Clase (`PostsInvertedIndex`)**
+
+- `load_data_from_csv`: Procesa los archivos CSV para instanciar los posts y vincularlos con sus respectivos likes.
+- `search_posts_with_hashtags`: Retorna una lista enlazada con los posts que contienen todos los términos solicitados, calculando la intersección de resultados.
+- `_get_hashtags_from_post`: Extrae las palabras de un texto y filtra aquellas que pertenezcan al conjunto de _stopwords_.
+- `_intersect_posts()`: Encuentra y retorna los posts comunes entre dos listas enlazadas distintas.
+
 # Entrega 2
 
 ## Diagramas de las estructuras de datos creadas
@@ -188,6 +210,16 @@ En cada iteración:
 
 Por eso, como el grafo se representa como listas enlazadas de adyacencia, la complejidad es `O(U + R)` en el peor caso, donde `U` es la cantidad de usuarios y `R` la cantidad de relaciones de amistad.
 
+## Funciones principales implementadas
+
+**Clase `SocialGraph`**:
+
+- `load_data_from_inverted_index`: Construye los vértices y aristas del grafo a partir de un diccionario de usuarios y el índice invertido.
+- `validate_symmetric_relations`: Asegura que todas las relaciones de amistad sean bidireccionales, verificando que el grafo sea no dirigido.
+- `bfs_get_connections`: Apartir de un usuario raíz, ejecuta el recorrido por anchura (BFS) para retornar listas de contactos de 1º, 2º y 3º grado.
+
 # Entrega 3
 
-placeholder
+## Diagramas de las estructuras de datos creadas
+
+## Funciones principales implementadas
