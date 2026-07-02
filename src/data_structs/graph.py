@@ -6,7 +6,7 @@ from data_structs.structs import User
 class GraphNode:
     def __init__(self, user: User) -> None:
         self.user: User = user
-        self.connections_list: LinkedList = LinkedList()
+        self.connections: LinkedList = LinkedList()
 
 
 class SocialGraph:
@@ -28,14 +28,14 @@ class SocialGraph:
 
     def validate_symmetric_relations(self) -> bool:
         for user_id, graph_node in self.graph_nodes.items():
-            current_node = graph_node.connections_list.head
+            current_node = graph_node.connections.head
             while current_node is not None:
                 friend_id = current_node.value
                 friend_graph_node = self.graph_nodes.get(friend_id)
 
                 if (
                     friend_graph_node is None
-                    or not friend_graph_node.connections_list.contains(user_id)
+                    or not friend_graph_node.connections.contains(user_id)
                 ):
                     return False
                 current_node = current_node.next
@@ -73,7 +73,7 @@ class SocialGraph:
                 case _:
                     pass
 
-            current_node = current_graph_node.connections_list.head
+            current_node = current_graph_node.connections.head
 
             while current_node is not None:
                 neighbor_id = current_node.value
@@ -97,5 +97,5 @@ class SocialGraph:
             graph_node_a = self.graph_nodes[user_id_a]
             graph_node_b = self.graph_nodes[user_id_b]
 
-            graph_node_a.connections_list.add_node(value=user_id_b, id=user_id_b)
-            graph_node_b.connections_list.add_node(value=user_id_a, id=user_id_a)
+            graph_node_a.connections.add_node(value=user_id_b, id=user_id_b)
+            graph_node_b.connections.add_node(value=user_id_a, id=user_id_a)
