@@ -14,6 +14,17 @@ Debido a que el dataset carece de lo siguiente, estos datos serán generados de 
 
 - **Registro de Likes:** Registro de likes dados por usuarios a posts.
 
+## Tabla de contenido
+
+- [Como ejecutar el proyecto](#como-ejecutar-el-proyecto)
+- [Entrega 1](#entrega-1)
+    - [Procesamiento de Datos](#procesamiento-de-datos)
+    - [Diagramas de las estructuras de datos creadas](#diagramas-de-las-estructuras-de-datos-creadas)
+- [Entrega 2](#entrega-2)
+    - [Diagramas de las estructuras de datos creadas](#diagramas-de-las-estructuras-de-datos-creadas-1)
+    - [Complejidad algorítmica de `bfs_get_connections`](#complejidad-algorítmica-de-bfs_get_connections)
+- [Entrega 3](#entrega-3)
+
 ## Como ejecutar el proyecto
 
 ### pre-requisitos:
@@ -125,6 +136,8 @@ graph LR
 
 # Entrega 2
 
+## Diagramas de las estructuras de datos creadas
+
 ```mermaid
 classDiagram
     class NodoGrafo {
@@ -157,10 +170,24 @@ graph LR
     end
 ```
 
+## Complejidad algorítmica de `bfs_get_connections`
+
+Es un método de [SocialGraph](./src/data_structs/graph.py) que realiza un recorrido BFS desde un `root_user_id` usando una cola `queue` y un set `visited`.
+
+Compejidad de:
+
+- cola: O(1) para encolar y desencolar.
+- set: O(1) para inserción y búsqueda.
+- ListaEnlazada: O(1) al agreagar nodo y O(n) para recorrer la lista completa.
+
+En cada iteración:
+
+- cada usuario se encola como máximo una vez gracias a `visited`.
+- al procesar un usuario, se recorre su lista de conexiones completa.
+- cada conexión (arista) se inspecciona un número constante de veces.
+
+Por eso, como el grafo se representa como listas enlazadas de adyacencia, la complejidad es `O(U + R)` en el peor caso, donde `U` es la cantidad de usuarios y `R` la cantidad de relaciones de amistad.
+
 # Entrega 3
-
-placeholder
-
-# Complejidades durante el desarrollo
 
 placeholder
