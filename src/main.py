@@ -6,8 +6,6 @@ from inverted_index.posts import PostsInvertedIndex
 from inverted_index.users import UsersInvertedIndex
 from stopwords import ALL_STOPWORDS
 
-# TODO: Remove 100 max rows implementation
-# DATA_DIR = "./data/test_data"  # 100 max rows
 # DATA_DIR = "./data/less_data"  # 1500 max rows
 DATA_DIR = "./data/release_data"  # 5000 max rows
 FRIENDS_CSV = DATA_DIR + "/friends.csv"

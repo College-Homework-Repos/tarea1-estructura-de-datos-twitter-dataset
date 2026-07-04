@@ -43,12 +43,6 @@ def main() -> None:
 
     copy_tables_with_less_rows(
         source_dir=dataset_path,
-        output_subdir="test_data",
-        max_rows=100,
-        user_tweets_limit=50,
-    )
-    copy_tables_with_less_rows(
-        source_dir=dataset_path,
         output_subdir="less_data",
         max_rows=1500,
         user_tweets_limit=50,
