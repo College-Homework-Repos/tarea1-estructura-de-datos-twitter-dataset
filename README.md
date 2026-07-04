@@ -18,14 +18,16 @@ Debido a que el dataset carece de lo siguiente, estos datos serán generados de 
 
 - [Como ejecutar el proyecto](#como-ejecutar-el-proyecto)
 - [Entrega 1](#entrega-1)
-    - [Procesamiento de Datos](#procesamiento-de-datos)
-    - [Diagramas de las estructuras de datos creadas](#diagramas-de-las-estructuras-de-datos-creadas)
-    - [Funciones principales implementadas](#funciones-principales-implementadas)
+  - [Procesamiento de Datos](#procesamiento-de-datos)
+  - [Diagramas de las estructuras de datos creadas](#diagramas-de-las-estructuras-de-datos-creadas)
+  - [Funciones principales implementadas](#funciones-principales-implementadas)
 - [Entrega 2](#entrega-2)
-    - [Diagramas de las estructuras de datos creadas](#diagramas-de-las-estructuras-de-datos-creadas-1)
-    - [Complejidad algorítmica de `bfs_get_connections`](#complejidad-algorítmica-de-bfs_get_connections)
-    - [Funciones principales implementadas](#funciones-principales-implementadas-1)
+  - [Diagramas de las estructuras de datos creadas](#diagramas-de-las-estructuras-de-datos-creadas-1)
+  - [Complejidad algorítmica de `bfs_get_connections`](#complejidad-algorítmica-de-bfs_get_connections)
+  - [Funciones principales implementadas](#funciones-principales-implementadas-1)
 - [Entrega 3](#entrega-3)
+  - [Dimensionamiento del hashmap](#dimensionamiento-del-hashmap)
+  - [Funciones principales implementadas](#funciones-principales-implementadas-2)
 
 ## Como ejecutar el proyecto
 
@@ -219,6 +221,30 @@ Por eso, como el grafo se representa como listas enlazadas de adyacencia, la com
 
 # Entrega 3
 
-## Diagramas de las estructuras de datos creadas
+## Dimensionamiento del hashmap
+
+Para obtener M (tamaño del hashmap) y $\alpha$ (factor de carga). Primero calculamos N, que es el número de hashtags únicos, que se obtiene al cargar el indice invertido de posts y obtener la longitud de las claves del diccionario.
+
+Una vez con esos valores, calculamos:
+$$
+N = 721.093 \\ 
+$$
+Entonces
+$$
+M \ge 1.5 \times N \\
+M \ge 1.081.639,5 \\
+$$
+Entonces, buscamos un primo `M` que cumpla con los requisitos.
+$$
+M = 1.081.657 \\
+\alpha = \frac{N}{M} = \frac{721.093}{1.081.657} \approx 0,6666 \le 0.67 \\
+$$
 
 ## Funciones principales implementadas
+
+**Clase `HashTable`**:
+
+- `_get_djb2_hash`: Función hash que implementa el algoritmo djb2 para determinar la posición (índice) de un hashtag en la tabla.
+- `load_data_from_csv`: Procesa el dataset (posts) ignorando las stopwords y contabilizando la frecuencia de aparición de cada hashtag en la tabla hash.
+- `get_top_n`: Retorna de manera ordenada (de mayor a menor) los `N` términos más frecuentes del vocabulario. 
+- `get_metrics`: Calcula las estadísticas luego de la construcción. Retorna el número total de colisiones, el largo máximo de una lista de colisiones y el largo promedio de dichas lista.
