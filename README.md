@@ -184,7 +184,6 @@ graph LR
         end
 
         subgraph H["ListaEnlazada"]
-
             K2 --> NodeC1["Usuario 5 (Amigo)"]
             NodeC1 --> NodeC2["Usuario 6 (Amigo)"]
             NodeC2 --> Null3((null))

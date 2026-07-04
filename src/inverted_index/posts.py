@@ -72,7 +72,7 @@ class PostsInvertedIndex:
             self.index[hashtag].add_node(post, post.id)
 
     def _get_hashtags_from_post(self, text: str) -> list[str]:
-        words = re.findall(r"[A-Za-z0-9]+", text.lower())
+        words = re.findall(r"[^\W_]+", text.lower())
         # Toma cada palabra del post y verifica que no esté en "stopwords".
         return [hashtag for hashtag in words if hashtag not in self._stopwords]
 
