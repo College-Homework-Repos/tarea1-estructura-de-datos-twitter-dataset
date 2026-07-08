@@ -223,22 +223,22 @@ Por eso, como el grafo se representa como listas enlazadas de adyacencia, la com
 
 ## Dimensionamiento del hashmap
 
-Para obtener M (tamaño del hashmap) y $\alpha$ (factor de carga). Primero calculamos N, que es el número de hashtags únicos, que se obtiene al cargar el indice invertido de posts y obtener la longitud de las claves del diccionario.
+Para obtener M (tamaño del hashmap) y α (factor de carga). Primero calculamos N, que es el número de hashtags únicos, que se obtiene al cargar el indice invertido de posts y obtener la longitud de las claves del diccionario.
 
 Una vez con esos valores, calculamos:
-$$
-N = 721.093 \\ 
-$$
+```text
+N = 721.093
+```
 Entonces
-$$
-M \ge 1.5 \times N \\
-M \ge 1.081.639,5 \\
-$$
+```text
+M ≥ 1.5 × N
+M ≥ 1.081.639,5
+```
 Entonces, buscamos un primo `M` que cumpla con los requisitos.
-$$
-M = 1.081.657 \\
-\alpha = \frac{N}{M} = \frac{721.093}{1.081.657} \approx 0,6666 \le 0.67 \\
-$$
+```text
+M = 1.081.657
+α = N / M = 721.093 / 1.081.657 ≈ 0,6666 ≤ 0.67
+```
 
 ## Funciones principales implementadas
 
