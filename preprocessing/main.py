@@ -28,10 +28,12 @@ def main() -> None:
         print("Archivos ya generados, no se vuelven a crear")
         return None
 
+    print("Obteniendo Datos de los csv...")
     user_ids = get_user_ids(USERS_CSV)
     both_followers_ids = get_both_followers_ids(FOLLOWERS_CSV)
     post_ids = get_posts_ids(POSTS_CSV)
 
+    print("Generando tabla amigos y likes...")
     friends_count = write_friends_csv(FRIENDS_CSV, user_ids, both_followers_ids)
     likes_count = write_likes_csv(LIKES_CSV, user_ids, post_ids)
 
@@ -41,6 +43,7 @@ def main() -> None:
     print("Filas de amigos escritas:", friends_count)
     print("Filas de likes escritas:", likes_count)
 
+    print("\nCopiando tablas...")
     copy_tables_with_less_rows(
         source_dir=dataset_path,
         output_subdir="less_data",
